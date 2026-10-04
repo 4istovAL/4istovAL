@@ -1,0 +1,23 @@
+import csv
+
+data = [
+    {"id": 1, "name": "Анна", "age": 25, "city": "Москва"},
+    {"id": 2, "name": "Борис", "age": 30, "city": "Санкт-Петербург"},
+    {"id": 3, "name": "Виктор", "age": 28, "city": "Казань"}
+]
+
+fieldnames = ["id", "name", "age", "city"]
+
+# Запись
+with open("people_dict.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.DictWriter(f, fieldnames=fieldnames)
+    writer.writeheader()  # запишет первую строку с названиями колонок
+    writer.writerows(data)
+
+# Чтение
+with open("people_dict.csv", "r", encoding="utf-8") as f:
+    reader = csv.DictReader(f)  # каждая строка будет словарем
+    loaded = list(reader)
+
+print(loaded)
+# Пример доступа: loaded[0]["name"] → "Анна"
